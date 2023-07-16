@@ -1,0 +1,35 @@
+import requests
+
+# Function to search for hashtags using the Google Custom Search API
+def search_hashtags_on_custom_search_api(hashtag, api_key, cx, num_results=10):
+    url = 'https://www.googleapis.com/customsearch/v1'
+
+    # Prepare the query parameters
+    params = {
+        'key': api_key,
+        'cx': cx,
+        'q': f'site:twitter.com #{hashtag}',
+        'num': num_results
+    }
+
+    try:
+        # Send the GET request to the Custom Search API
+        response = requests.get(url, params=params)
+        response_json = response.json()
+
+        # Process and display the search results
+        if 'items' in response_json:
+            for i, item in enumerate(response_json['items'], start=1):
+                print(f"Result #{i}: {item['link']}")
+        else:
+            print('No search results found.')
+    except requests.RequestException as e:
+        print('Error occurred:', str(e))
+
+# Example usage
+target_hashtag = '#examplehashtag'  # Replace with the hashtag you want to search for
+api_key = 'api key'  # Replace with your Google Custom Search API key
+cx = 'ID'  # Replace with your Custom Search Engine ID
+
+# Search for the hashtag using the Custom Search API
+search_hashtags_on_custom_search_api(target_hashtag, api_key, cx)
