@@ -1,0 +1,15 @@
+import requests
+
+def geolocate_ip_address(ip_address):
+    url = f'https://ipapi.co/{ip_address}/json/'
+    response = requests.get(url)
+    data = response.json()
+    return data
+
+# Usage:
+ip_address = '8.8.8.8'
+location_data = geolocate_ip_address(ip_address)
+print('IP:', location_data['ip'])
+print('City:', location_data['city'])
+print('Region:', location_data['region'])
+print('Country:', location_data['country_name'])
