@@ -1,6 +1,8 @@
 import requests
 
-# Function to search for usernames on Google
+# Simple Function to search for usernames on Google
+# https://developers.google.com/custom-search/v1/introduction
+# https://programmablesearchengine.google.com/controlpanel/all
 def search_google(query):
     api_key = 'API KEY'  # Replace with your Google Custom Search JSON API key
     search_engine_id = 'ID'  # Replace with your Google Custom Search Engine ID
@@ -29,7 +31,7 @@ def search_google(query):
         print('Error occurred:', str(e))
 
 # Example usage
-username = 'grant-rose.com'  # Replace with the username you want to search
+username = 'username'  # Replace with the username you want to search
 
 # Search for the username on Google
 search_google(username)
