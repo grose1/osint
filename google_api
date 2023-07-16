@@ -1,0 +1,35 @@
+import requests
+
+# Function to search for usernames on Google
+def search_google(query):
+    api_key = 'API KEY'  # Replace with your Google Custom Search JSON API key
+    search_engine_id = 'ID'  # Replace with your Google Custom Search Engine ID
+    base_url = 'https://www.googleapis.com/customsearch/v1'
+
+    params = {
+        'key': api_key,
+        'cx': search_engine_id,
+        'q': query
+    }
+
+    try:
+        response = requests.get(base_url, params=params)
+        data = response.json()
+
+        if 'items' in data:
+            print('Search Results for', query + ':')
+            for item in data['items']:
+                print('Title:', item['title'])
+                print('Link:', item['link'])
+                print('---')
+        else:
+            print('No search results found for', query)
+
+    except requests.exceptions.RequestException as e:
+        print('Error occurred:', str(e))
+
+# Example usage
+username = 'grant-rose.com'  # Replace with the username you want to search
+
+# Search for the username on Google
+search_google(username)
